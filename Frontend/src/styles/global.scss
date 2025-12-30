@@ -1,0 +1,340 @@
+/* ==========================================
+   Global Typography System - Modern Readable Design
+   Base font size: 16px for optimal readability
+   Minimum text size: 14px (0.875rem)
+   ========================================== */
+
+:root {
+  /* Font Size Scale - Standard Readable Typography */
+  --font-size-sm: 0.875rem;       /* 14px - Small text, minimum size */
+  --font-size-base: 1rem;         /* 16px - Body text, forms, buttons */
+  --font-size-md: 1.125rem;       /* 18px - Emphasized text, subtitles */
+  --font-size-lg: 1.25rem;        /* 20px - Section headers */
+  --font-size-xl: 1.5rem;         /* 24px - Page titles (h1) */
+  --font-size-2xl: 1.75rem;       /* 28px - Hero titles */
+  --font-size-3xl: 2rem;          /* 32px - Large display text */
+
+  /* Line Heights - Improved vertical rhythm */
+  --line-height-tight: 1.3;
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.8;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Family - Modern, readable stack */
+  --font-family-base: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'Fira Code', 'Consolas', 'Monaco', monospace;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  
+  /* Form & Button Padding - Comfortable touch/click targets */
+  --input-padding-y: 0.75rem;     /* 12px vertical */
+  --input-padding-x: 1rem;        /* 16px horizontal */
+  --button-padding-y: 0.75rem;    /* 12px vertical */
+  --button-padding-x: 1rem;       /* 16px horizontal */
+}
+
+/* Responsive Typography - Adjust for narrow laptops */
+@media (max-width: 1366px) {
+  :root {
+    --font-size-base: 1.05rem;      /* 16.8px - Slightly larger on narrow screens */
+    --font-size-md: 1.15rem;        /* 18.4px */
+    --font-size-lg: 1.3rem;         /* 20.8px */
+  }
+}
+
+/* Desktop optimization - maintain readability on large screens */
+@media (min-width: 1920px) {
+  :root {
+    --font-size-base: 1rem;         /* Keep 16px on large screens */
+    --font-size-lg: 1.25rem;        /* 20px */
+  }
+}
+
+/* ==========================================
+   Base Styles
+   ========================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: #222;
+  background-color: #fafafa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================
+   Typography Elements
+   ========================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  color: #1a1a1a;
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+}
+
+h5 {
+  font-size: var(--font-size-md);
+}
+
+h6 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+a {
+  color: #14B8A6;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #5568d3;
+    text-decoration: underline;
+  }
+}
+
+/* ==========================================
+   Form Elements Typography
+   ========================================== */
+
+label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-base);
+  color: #374151;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="url"],
+textarea,
+select {
+  padding: var(--input-padding-y) var(--input-padding-x);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #14B8A6;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+    font-size: var(--font-size-sm);
+  }
+}
+
+button {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* ==========================================
+   Table Typography
+   ========================================== */
+
+table {
+  font-size: var(--font-size-base);
+  
+  th {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    padding: 0.75rem 1rem;
+  }
+  
+  td {
+    font-size: var(--font-size-base);
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* ==========================================
+   Lists
+   ========================================== */
+
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  
+  li {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ==========================================
+   Utility Classes
+   ========================================== */
+
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-base { line-height: var(--line-height-base); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+
+/* ==========================================
+   Debug Utility (for QA testing)
+   ========================================== */
+
+.debug-font-size * {
+  outline: 1px dashed rgba(255, 0, 0, 0.3);
+  position: relative;
+
+  &::after {
+    content: attr(class) " - " attr(style);
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-size: 10px;
+    background: rgba(255, 255, 0, 0.9);
+    padding: 2px 4px;
+    color: #000;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 9999;
+    font-family: monospace;
+  }
+}
+
+/* Show computed font-size for debugging */
+.debug-font-size {
+  * {
+    position: relative;
+    
+    &::before {
+      content: 'font-size: ' attr(data-font-size);
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 2px 6px;
+      font-size: 11px;
+      font-family: var(--font-family-mono);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 10000;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+}
+
+/* ==========================================
+   Accessibility
+   ========================================== */
+
+/* Ensure minimum contrast for readability */
+::selection {
+  background-color: #14B8A6;
+  color: #fff;
+}
+
+/* Focus styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #14B8A6;
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   Print Styles
+   ========================================== */
+
+@media print {
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+  
+  h1 { font-size: 24pt; }
+  h2 { font-size: 20pt; }
+  h3 { font-size: 16pt; }
+  h4 { font-size: 14pt; }
+  h5, h6 { font-size: 12pt; }
+}

@@ -1,0 +1,414 @@
+// src/pages/Workspaces/InvitationManager/InvitationManager.module.scss
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .backLink {
+    display: inline-block;
+    color: #0066cc;
+    text-decoration: none;
+    margin-bottom: 15px;
+    font-size: 14px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #0052a3;
+      text-decoration: underline;
+    }
+  }
+
+  h2 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    color: #333;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.errorBox {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    margin: 0;
+    color: #c00;
+    font-size: 14px;
+  }
+
+  .retryButton {
+    background: #0066cc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #0052a3;
+    }
+
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.loading {
+  background: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  p {
+    color: #666;
+    font-size: 16px;
+  }
+}
+
+.invitationsList {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.emptyState {
+  padding: 40px 20px;
+  text-align: center;
+
+  p {
+    margin: 0;
+    color: #999;
+    font-size: 16px;
+
+    &:first-child {
+      font-weight: 500;
+      color: #666;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .emptySubtext {
+    font-size: 14px;
+  }
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 1.5fr 1.5fr;
+  gap: 12px;
+  padding: 15px 20px;
+  background: #f9f9f9;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+  font-size: 13px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr 1.5fr 1.5fr;
+  gap: 12px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: #fafafa;
+  }
+}
+
+.colEmail {
+  display: flex;
+  align-items: center;
+
+  .email {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    color: #333;
+    word-break: break-all;
+  }
+}
+
+.colRole {
+  display: flex;
+  align-items: center;
+
+  .role {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+}
+
+.colStatus {
+  display: flex;
+  align-items: center;
+}
+
+.statusPending,
+.statusAccepted,
+.statusRejected,
+.statusCancelled,
+.statusExpired {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.statusPending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.statusAccepted {
+  background: #d4edda;
+  color: #155724;
+}
+
+.statusRejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.statusCancelled {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+.statusExpired {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.colSentAt,
+.colExpires {
+  .date {
+    font-size: 13px;
+    color: #666;
+
+    &.expired {
+      color: #d9534f;
+      font-weight: 500;
+    }
+  }
+}
+
+.colActions {
+  display: flex;
+  justify-content: flex-end;
+
+  .actionButtons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .actionBtn {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+      border-color: #999;
+      background: #f5f5f5;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .resendBtn {
+    color: #0066cc;
+    border-color: #0066cc;
+
+    &:hover:not(:disabled) {
+      background: #e6f0ff;
+    }
+  }
+
+  .cancelBtn {
+    color: #d9534f;
+    border-color: #d9534f;
+
+    &:hover:not(:disabled) {
+      background: #ffe6e6;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    &:nth-child(n + 6) {
+      grid-column: span 2;
+    }
+  }
+
+  .colExpires {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .header {
+    padding: 15px;
+
+    h2 {
+      font-size: 22px;
+    }
+  }
+
+  .table {
+    display: block;
+  }
+
+  .tableHeader {
+    display: none;
+  }
+
+  .tableRow {
+    display: block;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    grid-template-columns: none;
+    gap: 0;
+  }
+
+  .tableRow > div::before {
+    display: block;
+    font-weight: 600;
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .colEmail {
+    display: block;
+    margin-bottom: 12px;
+
+    &::before {
+      content: 'Email';
+    }
+  }
+
+  .colRole {
+    display: block;
+    margin-bottom: 12px;
+
+    &::before {
+      content: 'Role';
+    }
+  }
+
+  .colStatus {
+    display: block;
+    margin-bottom: 12px;
+
+    &::before {
+      content: 'Status';
+    }
+  }
+
+  .colSentAt {
+    display: block;
+    margin-bottom: 12px;
+
+    &::before {
+      content: 'Sent At';
+    }
+  }
+
+  .colExpires {
+    display: block;
+    margin-bottom: 12px;
+
+    &::before {
+      content: 'Expires';
+    }
+  }
+
+  .colActions {
+    display: block;
+    justify-content: flex-start;
+
+    &::before {
+      content: 'Actions';
+    }
+
+    .actionButtons {
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .actionBtn {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,126 @@
+.sidebar {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: white;
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.navItem,
+.collapsibleBtn {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #6b7280;
+  text-decoration: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9fafb;
+    color: #14B8A6;
+    border-left-color: #14B8A6;
+  }
+
+  &.active {
+    background-color: #f0fdf4;
+    color: #14B8A6;
+    border-left-color: #14B8A6;
+    font-weight: 600;
+  }
+}
+
+.icon {
+  width: 20px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.label {
+  flex: 1;
+}
+
+.badge {
+  background-color: #ef4444;
+  color: white;
+  font-size: var(--font-size-sm);
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.chevron {
+  width: 16px;
+  margin-left: auto;
+  transition: transform 0.2s ease;
+}
+
+.collapsibleBtn.expanded {
+  background-color: #f9fafb;
+  color: #14B8A6;
+
+  .chevron {
+    transform: rotate(180deg);
+  }
+}
+
+.submenu {
+  background-color: #fafafa;
+  padding: 0.5rem 0;
+  border-left: 3px solid #e5e7eb;
+  margin-left: 0;
+
+  .navItem {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+
+    &:hover {
+      background-color: #f3f4f6;
+    }
+
+    &.active {
+      background-color: #ecfdf5;
+    }
+  }
+}
+
+.divider {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+// Scrollbar styling for the sidebar container
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+
+  &:hover {
+    background: #9ca3af;
+  }
+}

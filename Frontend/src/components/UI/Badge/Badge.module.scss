@@ -1,0 +1,41 @@
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+
+  &.default {
+    background: #f0f0f0;
+    color: #333;
+  }
+
+  &.primary {
+    background: #007bff;
+    color: white;
+  }
+
+  &.success {
+    background: #28a745;
+    color: white;
+  }
+
+  &.danger {
+    background: #dc3545;
+    color: white;
+  }
+
+  &.sm {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+
+  &.md {
+    font-size: 14px;
+  }
+
+  &.lg {
+    font-size: 16px;
+    padding: 6px 16px;
+  }
+}

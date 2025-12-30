@@ -1,0 +1,678 @@
+@use '../../../styles/variables' as *;
+
+// Color variables for action buttons
+$primary-color: #14B8A6;
+$danger-color: #dc2626;
+
+.surveyList {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.summaryLine {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0 0;
+  font-weight: 400;
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #14B8A6 0%, #0F766E 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    background: linear-gradient(135deg, #0F766E 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.filters {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.searchBox {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  svg {
+    position: absolute;
+    left: 1rem;
+    color: #9ca3af;
+  }
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #14B8A6;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+}
+
+.statusFilter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+  }
+}
+
+.select {
+  padding: 0.625rem 2.5rem 0.625rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  background: white;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #14B8A6;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+}
+
+.resultCount {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Bulk Actions */
+.bulkActions {
+  background: #f0fdfa;
+  border: 1px solid #ccfbf1;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.selectedCount {
+  font-weight: 600;
+  color: #0f766e;
+}
+
+.bulkDeleteButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #fee2e2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #fecaca;
+    border-color: #fca5a5;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.tableContainer {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 1024px) {
+    overflow-x: auto;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+
+  thead {
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #e5e7eb;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #f9fafb;
+      }
+
+      &.selectedRow {
+        background-color: #f0fdfa;
+        /* Light teal background */
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      padding: 1rem;
+      font-size: 0.875rem;
+      color: #374151;
+    }
+  }
+}
+
+.surveyTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  .title {
+    font-weight: 500;
+    color: #111827;
+  }
+}
+
+.clickableTitle {
+  cursor: pointer;
+  transition: color 0.15s;
+
+  &:hover {
+    color: $primary-color;
+    text-decoration: underline;
+  }
+}
+
+.responseCount {
+  font-weight: 600;
+  color: #14B8A6;
+}
+
+// Action buttons container
+.textActions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+// Base action link styles
+.actionLink {
+  background: transparent;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #4b5563;
+  transition: all 0.18s ease;
+  border-radius: 6px;
+  white-space: nowrap;
+
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    color: #d1d5db;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+      color: #d1d5db;
+    }
+  }
+}
+
+// Distribute - Primary Action
+.actionDistribute {
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  background: transparent;
+
+  &:hover:not(:disabled) {
+    background: $primary-color;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  &:active:not(:disabled) {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  }
+}
+
+// View - Secondary Action
+.actionView {
+  background: transparent;
+  color: #4b5563;
+  border: none;
+  padding: 0.375rem 0.75rem;
+
+  &:hover:not(:disabled) {
+    background: #f3f4f6;
+  }
+}
+
+// Edit - Neutral Action
+.actionEdit {
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  background: transparent;
+
+  &:hover:not(:disabled) {
+    background: #eef2ff;
+    border-color: $primary-color;
+  }
+}
+
+// Results - Secondary Action (same as View)
+.actionResults {
+  background: transparent;
+  color: #4b5563;
+  border: none;
+  padding: 0.375rem 0.75rem;
+
+  &:hover:not(:disabled) {
+    background: #f3f4f6;
+  }
+}
+
+// Archive - Neutral Action (same as Edit)
+.actionArchive {
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  background: transparent;
+
+  &:hover:not(:disabled) {
+    background: #eef2ff;
+    border-color: $primary-color;
+  }
+}
+
+// Delete - Danger Action
+.actionDelete {
+  background: transparent;
+  color: $danger-color;
+  border: none;
+  padding: 0.375rem 0.75rem;
+
+  &:hover:not(:disabled) {
+    background: #fee2e2;
+  }
+}
+
+.publishButton,
+.closeButton,
+.editButton,
+.distributeButton,
+.resultsButton,
+.deleteButton {
+  /* Legacy button styles removed/hidden if no longer used, or kept for fallback? */
+  /* Keeping them just in case but they are replaced in usage */
+  display: none;
+}
+
+.responseCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.responseCount {
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.hintText {
+  display: block;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.125rem;
+}
+
+.suggestionText {
+  display: block;
+  font-size: 0.7rem;
+  color: #d1d5db;
+  font-style: italic;
+  margin-top: 0.125rem;
+}
+
+.nextAction {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $primary-color;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: #6b7280;
+    margin: 0 0 1.5rem 0;
+  }
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.emptyButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #14B8A6 0%, #0F766E 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: linear-gradient(135deg, #0F766E 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Responsive table for small screens */
+@media (max-width: 1024px) {
+  .tableContainer {
+    overflow-x: visible;
+  }
+
+  .table {
+    min-width: auto;
+  }
+
+  /* Hide some columns on smaller screens
+  */
+  .table thead th:nth-child(3),
+  .table thead th:nth-child(4),
+  .table thead th:nth-child(5),
+  .table thead th:nth-child(6),
+  .table thead th:nth-child(7),
+  .table tbody td:nth-child(3),
+  .table tbody td:nth-child(4),
+  .table tbody td:nth-child(5),
+  .table tbody td:nth-child(6),
+  .table tbody td:nth-child(7) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .surveyTitle .title {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+}
+
+// Respondent View Styles
+
+.respondentView {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.tab {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -2px;
+
+  &:hover {
+    color: #374151;
+  }
+}
+
+.activeTab {
+  color: #14B8A6;
+  border-bottom-color: #14B8A6;
+}
+
+.respondentList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.respondentCard {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}
+
+.cardMain {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.cardDesc {
+  color: #6b7280;
+  font-size: 0.9375rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.cardMeta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.cardAction {
+  flex-shrink: 0;
+}
+
+.actionBtnPrimary {
+  padding: 0.625rem 1.25rem;
+  background-color: #111827;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #374151;
+  }
+}
+
+.actionBtnSecondary {
+  padding: 0.625rem 1.25rem;
+  background-color: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+  }
+}
+
+.actionBtnDisabled {
+  padding: 0.625rem 1.25rem;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  margin-top: 1rem;
+  padding: 0.625rem 1.25rem;
+  background: white;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: #f9fafb;
+  }
+}

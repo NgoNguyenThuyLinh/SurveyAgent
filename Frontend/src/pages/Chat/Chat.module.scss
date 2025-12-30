@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+
+.chatPage {
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+
+    h1 {
+        margin: 0 0 12px 0;
+        color: #333;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    p {
+        margin: 0;
+        color: #666;
+        font-size: 16px;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.5;
+    }
+}
+
+.content {
+    position: relative;
+    height: calc(100vh - 120px);
+
+    .chatboxOverlay {
+        position: static;
+        background: none;
+        padding: 0;
+        align-items: stretch;
+
+        .chatbox {
+            box-shadow: none;
+            border-radius: 0;
+            height: 100%;
+            max-height: none;
+            max-width: none;
+            border: none;
+        }
+    }
+}

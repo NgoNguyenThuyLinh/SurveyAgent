@@ -1,0 +1,112 @@
+@use '../../../styles/variables' as *;
+
+.dashboard {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.title {
+  font-size: var(--font-size-xl);  /* 28px - Page title */
+  font-weight: var(--font-weight-bold);
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+  line-height: var(--line-height-tight);
+}
+
+.subtitle {
+  font-size: var(--font-size-base);  /* 18px - Up from 15px */
+  color: #6b7280;
+  margin: 0;
+  line-height: var(--line-height-base);
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    
+    button {
+      flex: 1;
+    }
+  }
+}
+
+.actionButton,
+.primaryButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--button-padding-y) var(--button-padding-x);
+  border-radius: 8px;
+  font-size: var(--font-size-base);  /* 18px - Up from 14px */
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.actionButton {
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+
+  &:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+  }
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #14B8A6 0%, #0F766E 100%);
+  color: white;
+
+  &:hover {
+    background: linear-gradient(135deg, #0F766E 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fullWidthChart {
+  margin-bottom: 2rem;
+}

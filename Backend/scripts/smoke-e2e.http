@@ -1,0 +1,327 @@
+###
+# End-to-End Smoke Test for Survey Platform
+# Tests complete flow: Register → Login → Template → Survey → Collector → Response → Analytics
+# Use REST Client extension in VS Code to run these tests
+###
+
+@baseUrl = http://localhost:5000/api/modules
+@authToken = 
+@userId = 
+@templateId = 
+@surveyId = 
+@collectorId = 
+@collectorToken = 
+
+### ========================================
+### PHASE 1: AUTHENTICATION & USER MANAGEMENT
+### ========================================
+
+### 1.1 Register New User (Creator)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "smoke_creator",
+  "email": "smoke_creator@test.com",
+  "password": "Test@1234",
+  "full_name": "Smoke Test Creator",
+  "role": "creator"
+}
+
+### 1.2 Login as Creator
+# @name loginCreator
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "smoke_creator@test.com",
+  "password": "Test@1234"
+}
+
+### 1.3 Extract Token (Run after login)
+# Manually copy token from response above and set @authToken variable
+# Or use this if your REST Client supports:
+# @authToken = {{loginCreator.response.body.data.token}}
+
+### 1.4 Get Current User Profile
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### PHASE 2: TEMPLATE MANAGEMENT
+### ========================================
+
+### 2.1 Create Template
+# @name createTemplate
+POST {{baseUrl}}/templates
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Smoke Test Template",
+  "description": "Automated smoke test template for E2E flow",
+  "category": "Customer Feedback"
+}
+
+### 2.2 Add Question 1 (Multiple Choice)
+# Manually copy templateId from response above and set @templateId variable
+POST {{baseUrl}}/templates/{{templateId}}/questions
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "question_text": "How satisfied are you with our service?",
+  "question_type": "multiple_choice",
+  "is_required": true,
+  "order_position": 1
+}
+
+### 2.3 Add Question 2 (Rating)
+POST {{baseUrl}}/templates/{{templateId}}/questions
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "question_text": "Rate your overall experience (1-5)",
+  "question_type": "rating",
+  "is_required": true,
+  "order_position": 2,
+  "metadata": {
+    "min_value": 1,
+    "max_value": 5
+  }
+}
+
+### 2.4 Add Question 3 (Open-ended)
+POST {{baseUrl}}/templates/{{templateId}}/questions
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "question_text": "What can we improve?",
+  "question_type": "text",
+  "is_required": false,
+  "order_position": 3
+}
+
+### 2.5 Get Template with Questions
+GET {{baseUrl}}/templates/{{templateId}}
+Authorization: Bearer {{authToken}}
+
+### 2.6 List All Templates
+GET {{baseUrl}}/templates?page=1&limit=10
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### PHASE 3: SURVEY MANAGEMENT
+### ========================================
+
+### 3.1 Create Survey from Template
+# @name createSurvey
+POST {{baseUrl}}/surveys
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Smoke Test Survey - Customer Feedback",
+  "description": "Testing end-to-end survey flow",
+  "template_id": {{templateId}},
+  "status": "draft",
+  "settings": {
+    "anonymous_responses": false,
+    "allow_multiple_responses": false,
+    "show_progress_bar": true,
+    "randomize_questions": false
+  }
+}
+
+### 3.2 Get Survey Details
+# Manually copy surveyId from response above and set @surveyId variable
+GET {{baseUrl}}/surveys/{{surveyId}}
+Authorization: Bearer {{authToken}}
+
+### 3.3 Publish Survey
+PATCH {{baseUrl}}/surveys/{{surveyId}}/status
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "status": "active"
+}
+
+### 3.4 List All Surveys
+GET {{baseUrl}}/surveys?page=1&limit=10&status=active
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### PHASE 4: COLLECTOR MANAGEMENT
+### ========================================
+
+### 4.1 Create Web Link Collector
+# @name createCollector
+POST {{baseUrl}}/collectors
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "survey_id": {{surveyId}},
+  "type": "weblink",
+  "name": "Public Web Link - Smoke Test",
+  "settings": {
+    "close_date": null,
+    "response_limit": null,
+    "password_protected": false
+  }
+}
+
+### 4.2 Get Collector Details
+# Manually copy collectorId from response above and set @collectorId variable
+GET {{baseUrl}}/collectors/{{collectorId}}
+Authorization: Bearer {{authToken}}
+
+### 4.3 Get Collector Token
+# Extract the token from the collector response above
+# Set @collectorToken variable
+
+### 4.4 List Survey Collectors
+GET {{baseUrl}}/surveys/{{surveyId}}/collectors
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### PHASE 5: PUBLIC RESPONSE SUBMISSION
+### ========================================
+
+### 5.1 Get Survey by Public Token (No Auth Required)
+GET {{baseUrl}}/responses/public/{{collectorToken}}
+
+### 5.2 Submit Public Response (No Auth Required)
+POST {{baseUrl}}/responses/public/{{collectorToken}}
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "answer_value": "Very Satisfied"
+    },
+    {
+      "question_id": 2,
+      "answer_value": "5"
+    },
+    {
+      "question_id": 3,
+      "answer_value": "Everything is great! Keep up the good work."
+    }
+  ]
+}
+
+### 5.3 Submit Another Response with Different Answers
+POST {{baseUrl}}/responses/public/{{collectorToken}}
+Content-Type: application/json
+
+{
+  "answers": [
+    {
+      "question_id": 1,
+      "answer_value": "Satisfied"
+    },
+    {
+      "question_id": 2,
+      "answer_value": "4"
+    },
+    {
+      "question_id": 3,
+      "answer_value": "Better mobile experience would be nice."
+    }
+  ]
+}
+
+### ========================================
+### PHASE 6: RESPONSE MANAGEMENT
+### ========================================
+
+### 6.1 List Survey Responses
+GET {{baseUrl}}/responses?survey_id={{surveyId}}&page=1&limit=10
+Authorization: Bearer {{authToken}}
+
+### 6.2 Get Response Details
+# Copy a response_id from the list above
+GET {{baseUrl}}/responses/1
+Authorization: Bearer {{authToken}}
+
+### 6.3 Export Responses (CSV)
+GET {{baseUrl}}/export/responses/{{surveyId}}?format=csv
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### PHASE 7: ANALYTICS & INSIGHTS
+### ========================================
+
+### 7.1 Get Survey Statistics
+GET {{baseUrl}}/analytics/surveys/{{surveyId}}/stats
+Authorization: Bearer {{authToken}}
+
+### 7.2 Get Response Rate Over Time
+GET {{baseUrl}}/analytics/surveys/{{surveyId}}/response-rate?period=daily
+Authorization: Bearer {{authToken}}
+
+### 7.3 Get Question Analytics
+GET {{baseUrl}}/analytics/questions/1/stats
+Authorization: Bearer {{authToken}}
+
+### 7.4 Get Dashboard Overview
+GET {{baseUrl}}/analytics/dashboard/overview
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### PHASE 8: ADMIN - USER MANAGEMENT (Requires Admin Role)
+### ========================================
+
+### 8.1 List All Users (Admin Only)
+GET {{baseUrl}}/users?page=1&limit=10
+Authorization: Bearer {{authToken}}
+
+### 8.2 Get User Role Statistics (Admin Only)
+GET {{baseUrl}}/users/role-stats
+Authorization: Bearer {{authToken}}
+
+### 8.3 Get User Statistics (Admin Only)
+GET {{baseUrl}}/users/stats
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### PHASE 9: CLEANUP (Optional)
+### ========================================
+
+### 9.1 Close Survey
+PATCH {{baseUrl}}/surveys/{{surveyId}}/status
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "status": "closed"
+}
+
+### 9.2 Delete Collector
+DELETE {{baseUrl}}/collectors/{{collectorId}}
+Authorization: Bearer {{authToken}}
+
+### 9.3 Delete Survey
+DELETE {{baseUrl}}/surveys/{{surveyId}}
+Authorization: Bearer {{authToken}}
+
+### 9.4 Delete Template
+DELETE {{baseUrl}}/templates/{{templateId}}
+Authorization: Bearer {{authToken}}
+
+### ========================================
+### SUCCESS CRITERIA
+### ========================================
+# All requests should return:
+# - 200/201 status for successful operations
+# - Proper JSON response with { success: true, data: {...} }
+# - No 500 errors or server crashes
+# - Public response submission works without authentication
+# - Analytics endpoints return valid statistics
+# - RBAC properly enforced (admin-only endpoints blocked for creators)
+###

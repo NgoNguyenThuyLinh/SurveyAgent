@@ -1,0 +1,9 @@
+Error
+    at Query.run (D:\NCKH\Backend\node_modules\sequelize\lib\dialects\mysql\query.js:52:25)
+    at D:\NCKH\Backend\node_modules\sequelize\lib\sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async MySQLQueryInterface.select (D:\NCKH\Backend\node_modules\sequelize\lib\dialects\abstract\query-interface.js:407:12)
+    at async Question.findAll (D:\NCKH\Backend\node_modules\sequelize\lib\model.js:1140:21)
+    at async AnalyticsRepository.getSurveyQuestions (D:\NCKH\Backend\src\modules\analytics\repository\analytics.repository.js:19:16)
+    at async AnalyticsService.getQuestionAnalysis (D:\NCKH\Backend\src\modules\analytics\service\analytics.service.js:74:27)
+    at async verify (D:\NCKH\Backend\scripts\verify-analytics-data.js:31:27)

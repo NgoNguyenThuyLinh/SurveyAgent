@@ -1,0 +1,46 @@
+@use '../../../styles/variables' as *;
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+  font-size: var(--font-size-base);
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  position: relative;
+  min-height: calc(100vh - 64px);
+}
+
+.main {
+  flex: 1;
+  margin-left: 280px;              /* Match new sidebar width */
+  padding: 2rem;
+  overflow-y: auto;
+  font-size: var(--font-size-base);
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding: 1.5rem 1rem;
+  }
+}
+
+.content {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  min-height: 400px;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}

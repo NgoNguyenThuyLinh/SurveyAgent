@@ -1,0 +1,501 @@
+// Responsive Design System - Mobile First Approach
+// ============================================================
+@use "sass:map";
+
+// Breakpoints following Bootstrap 5.3
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Mixins for responsive design
+@mixin respond-above($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-below($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: #{map.get($breakpoints, $breakpoint) - 1px}) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-between($lower, $upper) {
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    @media (min-width: map.get($breakpoints, $lower)) and (max-width: #{map.get($breakpoints, $upper) - 1px}) {
+      @content;
+    }
+  }
+}
+
+// Container Responsive Utilities
+// ============================================================
+.container-responsive {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  
+  @include respond-above(sm) {
+    padding: 0 1.5rem;
+  }
+  
+  @include respond-above(md) {
+    padding: 0 2rem;
+  }
+  
+  @include respond-above(lg) {
+    max-width: 1200px;
+    padding: 0 2.5rem;
+  }
+  
+  @include respond-above(xl) {
+    max-width: 1400px;
+    padding: 0 3rem;
+  }
+}
+
+// Typography Responsive Scale
+// ============================================================
+.responsive-heading {
+  &.h1-responsive {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    
+    @include respond-above(md) {
+      font-size: 2.5rem;
+    }
+    
+    @include respond-above(lg) {
+      font-size: 3rem;
+    }
+  }
+  
+  &.h2-responsive {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    
+    @include respond-above(md) {
+      font-size: 2rem;
+    }
+    
+    @include respond-above(lg) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  &.h3-responsive {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    
+    @include respond-above(md) {
+      font-size: 1.5rem;
+    }
+    
+    @include respond-above(lg) {
+      font-size: 1.75rem;
+    }
+  }
+}
+
+// Navigation Responsive
+// ============================================================
+.navbar-responsive {
+  padding: 0.5rem 1rem;
+  
+  @include respond-above(lg) {
+    padding: 1rem 2rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.1rem;
+    
+    @include respond-above(md) {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .navbar-nav {
+    .nav-link {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      
+      @include respond-above(lg) {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+      }
+    }
+  }
+  
+  // Mobile menu improvements
+  @include respond-below(lg) {
+    .navbar-collapse {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 0.5rem;
+      padding: 1rem;
+      
+      .navbar-nav {
+        .nav-link {
+          border-bottom: 1px solid #f1f3f5;
+          margin-bottom: 0.25rem;
+          
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Card Responsive Design
+// ============================================================
+.card-responsive {
+  margin-bottom: 1rem;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  
+  @include respond-above(md) {
+    margin-bottom: 1.5rem;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-body {
+    padding: 1rem;
+    
+    @include respond-above(md) {
+      padding: 1.5rem;
+    }
+    
+    @include respond-above(lg) {
+      padding: 2rem;
+    }
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    
+    @include respond-above(md) {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+// Button Responsive System
+// ============================================================
+.btn-responsive {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  
+  @include respond-above(md) {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  @include respond-above(lg) {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+  
+  &.btn-sm-responsive {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    
+    @include respond-above(md) {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+  
+  &.btn-lg-responsive {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    
+    @include respond-above(md) {
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+    }
+    
+    @include respond-above(lg) {
+      padding: 1.25rem 2.5rem;
+      font-size: 1.25rem;
+    }
+  }
+}
+
+// Table Responsive Enhancements
+// ============================================================
+.table-responsive-enhanced {
+  @include respond-below(lg) {
+    .table {
+      font-size: 0.875rem;
+      
+      th, td {
+        padding: 0.5rem;
+        vertical-align: middle;
+      }
+      
+      // Hide less important columns on mobile
+      .hide-mobile {
+        display: none;
+      }
+      
+      // Stack table content on very small screens
+      @include respond-below(sm) {
+        thead {
+          display: none;
+        }
+        
+        tbody tr {
+          display: block;
+          border: 1px solid #dee2e6;
+          margin-bottom: 0.5rem;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          
+          td {
+            display: block;
+            text-align: right;
+            border: none;
+            padding: 0.25rem 0;
+            
+            &:before {
+              content: attr(data-label) ": ";
+              font-weight: bold;
+              float: left;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Dashboard Layout Responsive
+// ============================================================
+.dashboard-responsive {
+  .sidebar {
+    @include respond-below(lg) {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100vh;
+      z-index: 1050;
+      transition: left 0.3s ease;
+      background: white;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+      
+      &.show {
+        left: 0;
+      }
+    }
+  }
+  
+  .main-content {
+    margin-left: 0;
+    
+    @include respond-above(lg) {
+      margin-left: 250px;
+    }
+  }
+  
+  .dashboard-header {
+    padding: 1rem;
+    
+    @include respond-above(md) {
+      padding: 1.5rem 2rem;
+    }
+    
+    .dashboard-title {
+      font-size: 1.25rem;
+      
+      @include respond-above(md) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// Form Responsive Design
+// ============================================================
+.form-responsive {
+  .form-group {
+    margin-bottom: 1rem;
+    
+    @include respond-above(md) {
+      margin-bottom: 1.5rem;
+    }
+  }
+  
+  .form-control {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    
+    @include respond-above(md) {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  }
+  
+  .form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    
+    @include respond-above(md) {
+      font-size: 1rem;
+    }
+  }
+  
+  // Stacked form layout on mobile
+  @include respond-below(md) {
+    .row {
+      .col-md-6,
+      .col-md-4,
+      .col-md-3 {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+// Utility Classes for Responsive Design
+// ============================================================
+
+// Spacing utilities
+.spacing-responsive {
+  &.p-responsive {
+    padding: 1rem;
+    
+    @include respond-above(md) {
+      padding: 1.5rem;
+    }
+    
+    @include respond-above(lg) {
+      padding: 2rem;
+    }
+  }
+  
+  &.m-responsive {
+    margin: 1rem;
+    
+    @include respond-above(md) {
+      margin: 1.5rem;
+    }
+    
+    @include respond-above(lg) {
+      margin: 2rem;
+    }
+  }
+}
+
+// Visibility utilities
+.visible-mobile {
+  @include respond-above(md) {
+    display: none !important;
+  }
+}
+
+.visible-tablet {
+  display: none !important;
+  
+  @include respond-between(md, lg) {
+    display: block !important;
+  }
+}
+
+.visible-desktop {
+  @include respond-below(lg) {
+    display: none !important;
+  }
+}
+
+.hidden-mobile {
+  @include respond-below(md) {
+    display: none !important;
+  }
+}
+
+.hidden-tablet {
+  @include respond-between(md, lg) {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @include respond-above(lg) {
+    display: none !important;
+  }
+}
+
+// Grid System Enhancements
+// ============================================================
+.grid-responsive {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  
+  @include respond-above(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-above(md) {
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @include respond-above(lg) {
+    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  &.grid-2-col {
+    @include respond-above(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  &.grid-3-col {
+    @include respond-above(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// Animation and Transitions
+// ============================================================
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+}

@@ -1,0 +1,233 @@
+/* SurveyAccessManager.module.scss */
+.accessManager {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.accessManager h3 {
+  margin: 0 0 20px 0;
+  color: #495057;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.notice {
+  padding: 20px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  border: 1px solid #b39ddb;
+  border-radius: 12px;
+  color: #4a4a4a;
+  
+  h4 {
+    margin: 0 0 15px 0;
+    color: #6a1b9a;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+  }
+  
+  li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: #333;
+    
+    &:before {
+      margin-right: 8px;
+    }
+  }
+  
+  strong {
+    color: #6a1b9a;
+    font-weight: 600;
+  }
+}
+
+.grantSection {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.grantSection h4 {
+  margin: 0 0 15px 0;
+  color: #343a40;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.accessForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 5px;
+  color: #495057;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.formGroup input,
+.formGroup select {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: 0;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.grantButton {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.grantButton:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.grantButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.currentAccess h4 {
+  margin: 0 0 15px 0;
+  color: #343a40;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.noAccess {
+  color: #6c757d;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+
+.accessList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accessItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+}
+
+.accessInfo {
+  flex: 1;
+}
+
+.userName {
+  font-weight: 600;
+  color: #343a40;
+  margin-bottom: 5px;
+}
+
+.accessDetails {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.accessType {
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  
+  &.respond {
+    background: #d1ecf1;
+    color: #0c5460;
+  }
+  
+  &.view {
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  &.edit {
+    background: #fff3cd;
+    color: #856404;
+  }
+  
+  &.manage {
+    background: #f8d7da;
+    color: #721c24;
+  }
+}
+
+.expires {
+  color: #6c757d;
+}
+
+.notes {
+  color: #495057;
+  font-style: italic;
+}
+
+.revokeButton {
+  padding: 6px 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.revokeButton:hover {
+  background: #c82333;
+}

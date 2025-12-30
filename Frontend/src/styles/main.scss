@@ -1,0 +1,418 @@
+// Import global typography and base styles
+@use './global.scss';
+@use './variables' as *;
+
+// Import responsive utilities
+@use './responsive.scss' as *;
+
+// Custom variables
+:root {
+  --primary-gradient: linear-gradient(135deg, #14B8A6, #0F766E);
+  --primary-color: #14B8A6; // teal
+  --secondary-color: #0F766E; // dark teal
+  --dark-text: #0b1020;
+  --gray-text: #94a3b8;
+  --light-bg: #0e152e;
+}
+
+// Custom styles
+.bg-gradient-primary {
+  background: var(--primary-gradient);
+}
+
+.text-gradient-primary {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-gradient-primary {
+  background: var(--primary-gradient);
+  border: none;
+  color: #0b1020;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(34, 211, 238, 0.25);
+    color: #0b1020;
+  }
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e5e7eb;
+  text-decoration: none;
+  
+  &:hover {
+    color: #e5e7eb;
+    text-decoration: none;
+  }
+}
+
+.hero-section {
+  padding: 5rem 0;
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    
+    @media (min-width: 768px) {
+      font-size: 3.5rem;
+    }
+  }
+}
+
+.feature-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    border-color: rgba(139, 92, 246, 0.35);
+  }
+}
+
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-gradient);
+  margin-bottom: 1rem;
+}
+
+.dashboard-preview {
+  background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+  border-radius: 2rem;
+  padding: 3rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.mock-dashboard {
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.mock-dashboard-header {
+  background: var(--primary-gradient);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: between;
+  align-items: center;
+}
+
+.testimonial-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.stats-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem;
+  
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// Form styles
+.form-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+}
+
+.auth-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 3rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-control {
+  border-radius: 0.75rem;
+  border: 2px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  
+  &:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.25);
+  }
+}
+
+// Dashboard styles
+.sidebar {
+  background: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  .nav-link {
+    color: var(--gray-text);
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    margin: 0.25rem;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: var(--light-bg);
+      color: var(--primary-color);
+    }
+    
+    &.active {
+      background: var(--primary-gradient);
+      color: white;
+    }
+  }
+}
+
+.main-content {
+  background: var(--light-bg);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+// Survey creation styles
+.survey-builder {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.question-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: var(--primary-color);
+  }
+}
+
+// Enhanced Responsive Design System
+// ============================================================
+
+// Mobile First Responsive Styles
+@include respond-below(sm) {
+  .hero-section {
+    padding: 2rem 0 !important;
+    text-align: center;
+    
+    h1 {
+      font-size: 1.75rem !important;
+      line-height: 1.2;
+    }
+    
+    .lead {
+      font-size: 1rem;
+    }
+    
+    .btn-lg {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+  
+  .feature-card {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 1rem;
+    
+    .feature-icon {
+      font-size: 2rem !important;
+    }
+    
+    h5 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .dashboard-preview {
+    padding: 1rem;
+    
+    img {
+      border-radius: 0.5rem;
+    }
+  }
+  
+  .nav-brand {
+    font-size: 1rem !important;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+// Tablet Responsive (768px - 991px)
+@include respond-between(md, lg) {
+  .hero-section {
+    padding: 4rem 0;
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+    
+    .lead {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .feature-card {
+    margin-bottom: 2rem;
+    
+    .feature-icon {
+      font-size: 3rem;
+    }
+  }
+  
+  .dashboard-preview {
+    padding: 2rem;
+  }
+  
+  // Two column layout for features
+  .features-grid {
+    .col-md-4 {
+      flex: 0 0 50%;
+      max-width: 50%;
+      
+      &:nth-child(odd):last-child {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+// Desktop Responsive (992px+)
+@include respond-above(lg) {
+  .hero-section {
+    padding: 6rem 0;
+    
+    h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+    }
+    
+    .lead {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .feature-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .feature-icon {
+      font-size: 3.5rem;
+    }
+  }
+  
+  .dashboard-preview {
+    padding: 3rem;
+  }
+}
+
+// Navigation Responsive Enhancements
+.navbar {
+  @extend .navbar-responsive;
+  
+  @include respond-below(lg) {
+    .navbar-toggler {
+      border: none;
+      padding: 0.25rem 0.5rem;
+      
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    
+    .navbar-collapse {
+      margin-top: 1rem;
+      
+      .nav-link {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+      
+      .btn {
+        margin: 0.5rem 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Card System Responsive
+.card {
+  @extend .card-responsive;
+}
+
+// Button System Responsive
+.btn {
+  @extend .btn-responsive;
+}
+
+// Table Responsive Enhancements
+.table-responsive {
+  @extend .table-responsive-enhanced;
+}
+
+// Form Responsive
+.form-group,
+.mb-3 {
+  @extend .form-responsive;
+}

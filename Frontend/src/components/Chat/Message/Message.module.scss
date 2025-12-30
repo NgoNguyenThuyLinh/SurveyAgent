@@ -1,0 +1,267 @@
+@import '../../../styles/variables';
+
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    max-width: 80%;
+
+    &.userMessage {
+        align-self: flex-end;
+        align-items: flex-end;
+    }
+
+    &.aiMessage {
+        align-self: flex-start;
+        align-items: flex-start;
+    }
+}
+
+.messageHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #666;
+
+    .userMessage & {
+        flex-direction: row-reverse;
+    }
+}
+
+.sender {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.avatar,
+.aiAvatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.avatar {
+    background: $primary;
+}
+
+.aiAvatar {
+    background: #6c757d;
+    font-size: 14px;
+}
+
+.senderName {
+    font-weight: 600;
+    color: #333;
+}
+
+.provider {
+    font-weight: normal;
+    color: #666;
+    font-size: 11px;
+}
+
+.metadata {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #999;
+}
+
+.responseTime {
+    padding: 2px 6px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    font-size: 10px;
+}
+
+.timestamp {
+    white-space: nowrap;
+}
+
+.errorBadge {
+    cursor: help;
+}
+
+.messageContent {
+    background: #f8f9fa;
+    padding: 12px 16px;
+    border-radius: 12px;
+    position: relative;
+    word-wrap: break-word;
+
+    .userMessage & {
+        background: $primary;
+        color: white;
+        border-bottom-right-radius: 4px;
+    }
+
+    .aiMessage & {
+        border-bottom-left-radius: 4px;
+        border: 1px solid #e0e0e0;
+    }
+}
+
+.loadingMessage {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+}
+
+.typingIndicator {
+    display: flex;
+    gap: 3px;
+    
+    span {
+        width: 6px;
+        height: 6px;
+        background: #ccc;
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+        
+        &:nth-child(1) { animation-delay: 0s; }
+        &:nth-child(2) { animation-delay: 0.2s; }
+        &:nth-child(3) { animation-delay: 0.4s; }
+    }
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.5;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+.text {
+    line-height: 1.5;
+    white-space: pre-wrap;
+    
+    .userMessage & {
+        color: white;
+    }
+
+    &.collapsed {
+        max-height: 120px;
+        overflow: hidden;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(transparent, #f8f9fa);
+        }
+
+        .userMessage & {
+            &::after {
+                background: linear-gradient(transparent, $primary);
+            }
+        }
+    }
+}
+
+.expandBtn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+    text-decoration: underline;
+
+    .userMessage & {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    &:hover {
+        color: #333;
+
+        .userMessage & {
+            color: white;
+        }
+    }
+}
+
+.messageActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    .message:hover & {
+        opacity: 1;
+    }
+}
+
+.actionBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.1);
+
+        .userMessage & {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+.tokenCount {
+    font-size: 10px;
+    color: #999;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2px 6px;
+    border-radius: 8px;
+
+    .userMessage & {
+        background: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .message {
+        max-width: 90%;
+    }
+
+    .messageContent {
+        padding: 10px 12px;
+    }
+
+    .messageHeader {
+        font-size: 11px;
+    }
+
+    .avatar,
+    .aiAvatar {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+}

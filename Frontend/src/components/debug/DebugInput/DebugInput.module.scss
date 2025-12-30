@@ -1,0 +1,23 @@
+.debugInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e74c3c; /* Red border to make it obvious */
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff !important;
+  pointer-events: auto !important;
+  user-select: text !important;
+  cursor: text !important;
+  
+  &:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+    background-color: #fff !important;
+  }
+  
+  &::placeholder {
+    color: #95a5a6;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.switch {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  background: #ccc;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+  padding: 0;
+
+  &.checked {
+    background: #007bff;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  transition: left 0.3s;
+  pointer-events: none;
+}
+
+.switch.checked .slider {
+  left: 25px;
+}
+
+.label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}

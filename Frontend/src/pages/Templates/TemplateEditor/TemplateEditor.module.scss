@@ -1,0 +1,469 @@
+@use '../../../styles/variables' as *;
+$primary-light: #F0FDFA; // Define locally if not in variables
+
+.templateEditor {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f9fafb;
+    border-color: #14B8A6;
+    color: #14B8A6;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  @media (max-width: 1024px) {
+    order: 2;
+  }
+}
+
+.templateInfo {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 2rem;
+
+  @media (max-width: 1024px) {
+    position: static;
+  }
+}
+
+.main {
+  @media (max-width: 1024px) {
+    order: 1;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1.5rem 0;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    font-family: inherit;
+
+    &:focus {
+      outline: none;
+      border-color: #14B8A6;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    &:disabled {
+      background: #f9fafb;
+      cursor: not-allowed;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+
+.checkboxGroup {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+
+    input[type="checkbox"] {
+      width: auto;
+      cursor: pointer;
+    }
+  }
+}
+
+.saveButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #14B8A6 0%, #0F766E 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0F766E 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.questionsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.addQuestionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, $primary-dark 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #9ca3af;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+
+// -----------------------------------------------------------------------------
+// Step Indicator
+// -----------------------------------------------------------------------------
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: $gray-400;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+
+    &.active {
+      color: $gray-900;
+      font-weight: 600;
+
+      .stepNumber {
+        background: $primary;
+        color: white;
+        border-color: $primary;
+      }
+    }
+
+    &.completed {
+      color: $primary-dark;
+
+      .stepNumber {
+        background: $primary-light;
+        color: $primary;
+        border-color: $primary;
+      }
+    }
+  }
+
+  .stepNumber {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid $gray-200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+
+  .stepLine {
+    height: 2px;
+    width: 60px;
+    background: $gray-200;
+    margin: 0 1rem;
+    border-radius: 2px;
+
+    &.active {
+      background: $primary;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Main Layout
+// -----------------------------------------------------------------------------
+.sidebar {
+  @media (max-width: 1024px) {
+    order: 2;
+  }
+}
+
+.main {
+  @media (max-width: 1024px) {
+    order: 1;
+  }
+}
+
+.lockedSection {
+  opacity: 0.6;
+  pointer-events: none;
+  filter: grayscale(1);
+  position: relative;
+
+  // Optional: Add a "Locked" badge or overlay if desired, but opacity might be enough.
+}
+
+// -----------------------------------------------------------------------------
+// Empty State
+// -----------------------------------------------------------------------------
+.emptyQuestions {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px dashed $gray-300; // Dashed border for "drop area" feel
+  box-shadow: none;
+  transition: all 0.2s;
+
+  .emptyIcon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: $gray-300;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      stroke-width: 1.5;
+    }
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $gray-900;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: $gray-500;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .emptyHint {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: $gray-50;
+    border-radius: 100px;
+    display: inline-block;
+    font-size: 0.85rem;
+    color: $gray-600;
+    font-weight: 500;
+  }
+}
+
+// ... existing modal styles ...
+
+
+// Modal styles
+.modalForm {
+  padding: 1.5rem 0;
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.optionRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.optionInput {
+  flex: 1;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #14B8A6;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+}
+
+.removeOptionButton {
+  padding: 0.5rem;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  color: #c00;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: all 0.2s;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #fcc;
+    border-color: #faa;
+  }
+}
+
+.addOptionButton {
+  padding: 0.625rem 1rem;
+  background: #f3f4f6;
+  border: 1px dashed #d1d5db;
+  border-radius: 6px;
+  color: #0F766E;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #e5e7eb;
+    border-color: #14B8A6;
+    border-style: solid;
+  }
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancelButton,
+.submitButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.cancelButton {
+  background: #f3f4f6;
+  color: #374151;
+
+  &:hover:not(:disabled) {
+    background: #e5e7eb;
+  }
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #14B8A6 0%, #0F766E 100%);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0F766E 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  &.danger {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+  }
+}

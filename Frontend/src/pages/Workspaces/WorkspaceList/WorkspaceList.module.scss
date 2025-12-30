@@ -1,0 +1,581 @@
+.workspaceContainer {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin: 0;
+    font-weight: 700;
+  }
+}
+
+.headerActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.searchBox {
+  position: relative;
+}
+
+.searchInput {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 250px;
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #14B8A6;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.createButton {
+  padding: 0.75rem 1.5rem;
+  background: #14B8A6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #0F766E;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.error {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: #c00;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 1rem;
+
+  .emptyIcon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #666;
+    font-size: 1.1rem;
+  }
+}
+
+.workspaceList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.bulkActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #14B8A6;
+
+  .selectActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .selectAllLabel {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #333;
+      font-size: 0.9rem;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: #14B8A6;
+      }
+    }
+
+    .selectedInfo {
+      font-size: 0.9rem;
+      color: #14B8A6;
+      font-weight: 500;
+    }
+  }
+
+  .bulkActionButtons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .deleteButton {
+    background: #f56565;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:hover {
+      background: #e53e3e;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.workspaceCard {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+
+  &.selected {
+    border-color: #14B8A6;
+    background: rgba(16, 185, 129, 0.02); // Much subtler
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+  }
+
+  &:hover {
+    border-color: #14B8A6;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08); // Soft shadow
+    transform: translateY(-2px); // Subtle lift
+    cursor: pointer;
+  }
+
+  .workspaceCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0; // Fix duplicate flex overflow issues
+  }
+
+  .headerRight {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .headerIconActions {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .iconAction {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 0.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      color: #14B8A6;
+      background: #f0fdfa;
+    }
+  }
+
+  .workspaceCheckbox {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    accent-color: #14B8A6;
+    cursor: pointer;
+  }
+
+  .workspaceName {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0f172a; // Darker slate
+    margin: 0;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.badges {
+  /* Legacy class kept just in case, but structure changed in JSX */
+  display: flex;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px; // Pill shape
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.badgeOwner {
+  background-color: #14B8A6; // Solid primary
+  color: white;
+  border: 1px solid #14B8A6;
+}
+
+.badgeMember {
+  background-color: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1; // Subtle outline
+}
+
+.workspaceSubInfo {
+  margin-bottom: 1rem;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  color: #64748b;
+
+  .metaIcon {
+    color: #94a3b8;
+  }
+
+  .workspaceOwner {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #64748b;
+  }
+}
+
+.workspaceDescription {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.cardDivider {
+  height: 1px;
+  background-color: #f1f5f9; // Very subtle
+  margin: 0 -1.5rem 1rem -1.5rem; // Bleed to edges
+}
+
+.actions {
+  display: flex; // Full width flex
+  gap: 1rem;
+}
+
+.actionButton {
+  flex: 1; // Grow to fill space
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  border: 1px solid transparent;
+
+  &.primary {
+    background: #14B8A6;
+    color: white;
+    box-shadow: 0 2px 4px rgba(20, 184, 166, 0.2);
+
+    &:hover {
+      background: #0d9488;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(20, 184, 166, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Outline class removed from main button, but kept if needed for fallback
+  &.outline {
+    background: white;
+    border-color: #e2e8f0;
+    color: #64748b;
+
+    &:hover {
+      border-color: #14B8A6;
+      color: #14B8A6;
+    }
+  }
+}
+
+// Modal styles
+
+// Modal styles
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #666;
+    }
+  }
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #14B8A6;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.submitButton {
+  padding: 0.75rem 1.5rem;
+  background: #14B8A6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #0F766E;
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.cancelButton {
+  padding: 0.75rem 1.5rem;
+  background: #f0f0f0;
+  color: #666;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #e0e0e0;
+  }
+}
+
+// Pagination Styles
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  .paginationInfo {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .paginationControls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .pageButton {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #e0e0e0;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #333;
+      transition: all 0.2s;
+      min-width: 40px;
+      text-align: center;
+      font-size: 0.9rem;
+
+      &:hover {
+        border-color: #14B8A6;
+        background: rgba(16, 185, 129, 0.05);
+      }
+
+      &.active {
+        background: #14B8A6;
+        color: white;
+        border-color: #14B8A6;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+
+        &:hover {
+          border-color: #e0e0e0;
+          background: white;
+        }
+      }
+    }
+
+    .pageDots {
+      color: #999;
+      padding: 0 0.25rem;
+    }
+  }
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #14B8A6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
